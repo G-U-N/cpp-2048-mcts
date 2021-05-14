@@ -1,5 +1,5 @@
 #include "matrix.h"
-#include "MCTS/randomMctsPlayer.h"
+#include "randomMctsPlayer.h"
 #include "yourplayer.h"
 #include <stdlib.h>
 #include <unistd.h>

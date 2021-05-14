@@ -1,34 +1,92 @@
-# 2048-AI
+# C++ 2048 
 
 
 
-### 基于C++面向对象编程的linux终端小游戏。
-
-- [x] 支持人类玩家！
-
-- [x] 支持智能Agent！
-  - [x]  随机Agent
-  - [x]  RandomMCTSAgent(使用启发式的状态奖励函数与随机的Rollout策略)
-- [x] 设置不同的随机种子可能会有不同的效果
-  - [x] 有些种子可以成功合成2048
-  - [ ] 有些则只能合成到1024，有待改进。
+>  基于C++面向对象编程的Linux终端小游戏
 
 
 
-## 完成作业的一些感想
+作者：汪福运
 
-蒙特卡洛树搜索一个难点实际上要求环境完全可观察，以随机蒙特卡洛树搜索为例，其simulate过程中的随机种子应该与真实环境中的随机种子保持一致。当然也有部分可观察的蒙特卡洛树搜索POMCP.
+Nanjing University, School of Artificial Intelligence.
 
-另外一个难点，就是如何设计状态奖励函数，即你如何去评价一个状态的好坏。
+## 1.环境配置
 
-在我看来这就是alpha go
+Linux系统下
 
-使用神经网络的初衷
+首先确保安装
 
+```shell
+g++
 
+ncurses　库
 
-一方面它使用了一个神经网络能够近似的模拟对手的行动，使得simulate过程中的环境变化与真实的环境变化尽可能相同。
+figlet  终端工具
 
-另一方面，它使用神经网络来对一个局面来进行打分，评估对局面的好坏。
+lolcat 　终端工具
+```
 
-> 当然它具体如何实现以及如何训练我尚未理解。
+```shell
+sudo apt-get install figlet
+
+sudo apt-get install lolcat
+```
+
+## 2. 使用方法
+
+Makefile中设计了3个命令
+
+1. 清空当前文件夹下的可执行文件
+
+```shell
+make clean
+```
+
+2. 使用自己设计的Agent玩2048小游戏
+
+```shell
+make run
+```
+
+3. 人工玩2048小游戏
+
+```shell
+make play
+```
+
+## 3.设计Agent的方法
+
+在yourplayer.h头文件中实现所必须的两个函数
+
+```c
+double getReward(const Matrix &matrix)
+```
+
+```c
+ACTION run(const Matrix &matrix, int seed = 4)
+```
+
+为了便于对环境的模拟,提供了如下的API用于完成该函数
+
+```c
+ * matrix[i][j] 访问游戏中当前位置的方块中的值,若当前位置没有值,则返回0
+ * matrix.getAvailabelActions() 返回当前所有可行的行动vector
+ * matrix.score() 返回当前状态的得分
+ * matrix.getGameState() 返回游戏当前的状态
+ * matrix.update() 返回新的matrix,用于模拟中的未来的状态,参数为你选择的行动.
+```
+
+>  提供了我自己写的RandomMctsPlayer作为设计Agent参考
+>
+> 包含mctsnode和RandomMctsPlayer头文件.
+
+## 4. 运行结果展示
+
+![dis3](imgs/dis3.png)
+
+![dis4](imgs/dis4.png)
+
+![dis2](imgs/dis2.png)
+
+![dis1](imgs/dis1.png)
+
