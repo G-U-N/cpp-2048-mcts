@@ -1,5 +1,6 @@
 #include "matrix.h"
-#include "randomMctsPlayer.h"
+#include "MCTS/randomMctsPlayer.h"
+#include "yourplayer.h"
 #include <stdlib.h>
 #include <unistd.h>
 class Game
@@ -7,8 +8,11 @@ class Game
 private:
     Matrix matrix;
     char name[10];
-    RandomMCTSPlayer mctsPlayer;
 
+
+#ifndef PLAY
+    MyPlayer myplayer ;
+#endif 
 public:
     Game()
     {
@@ -45,26 +49,30 @@ public:
             if (key == 'q')
             {
                 endwin();
-                exit(0);
+                // exit(0);
+                break;
             }
-            // switch (key)
-            // {
-            // case 'w':
-            //     act = ACTION_UP;
-            //     break;
-            // case 'a':
-            //     act = ACTION_LEFT;
-            //     break;
-            // case 'd':
-            //     act = ACTION_RIGHT;
-            //     break;
-            // case 's':
-            //     act = ACTION_DOWN;
-            //     break;
-            // default:
-            //     break;
-            // }
-            act=mctsPlayer.mctsSearch(matrix);
+#ifdef PLAY
+            switch (key)
+            {
+            case 'w':
+                act = ACTION_UP;
+                break;
+            case 'a':
+                act = ACTION_LEFT;
+                break;
+            case 'd':
+                act = ACTION_RIGHT;
+                break;
+            case 's':
+                act = ACTION_DOWN;
+                break;
+            default:
+                break;
+            }
+#else 
+            act=myplayer.run(matrix);
+#endif 
             matrix.update(act);
             matrix.render();
             GAME_STATE gstate = matrix.getState();

@@ -221,7 +221,7 @@ public:
         }
         return isChange;
     }
-    vector<ACTION> getAvailableActions()
+    vector<ACTION> getAvailableActions() const
     {
         vector<ACTION> availableActions;
         //we don't have dynamic variables, so we are not afraid of the override.
@@ -235,7 +235,7 @@ public:
         }
         return availableActions;
     }
-    int get0Num()
+    int get0Num() const
     {
         int ans=0;
         for (int i=0;i<ROW_NUM;i++)
@@ -250,11 +250,14 @@ public:
         }
         return ans;
     }
-    int getElement(int i,int j)
+    int getElement(int i,int j) const 
     {
         return data[i][j];
     }
-
+    const int *operator[](int i) const 
+    {
+        return data[i];
+    }
     void render()
     {
         clear();

@@ -1,18 +1,17 @@
 #include "mctsnode.h"
+#include "player.h"
 
-#define REWARD1
-class RandomMCTSPlayer
+class RandomMCTSPlayer:public Player
 {
 private:
     double uct_c;
     uint32_t max_iterattions;
     uint32_t simulation_depth;
     double backup_factor;
-    double getReward(Matrix matrix)
+    double getReward(const Matrix& matrix)
     {
 
-        // 状态评估要写好!!!!!
-#if defined(REWARD1)
+
         if (matrix.getState() == GAME_LOSE)
         {
             return -100;
@@ -20,7 +19,7 @@ private:
         double reward = 0;
         if (matrix.getState() == GAME_WIN)
         {
-            reward+=100;
+            reward += 100;
         }
         reward += 10 * matrix.getAvailableActions().size();
         reward += 10 * matrix.get0Num();
@@ -31,11 +30,11 @@ private:
             int value = -1;
             for (j = 0; j < COL_NUM; j++)
             {
-                if (matrix.getElement(i, j) != 0)
+                if (matrix[i][j] != 0)
                 {
-                    if (matrix.getElement(i, j) > value)
+                    if (matrix[i][j] > value)
                     {
-                        value = matrix.getElement(i, j);
+                        value = matrix[i][j];
                     }
                     else
                     {
@@ -56,11 +55,11 @@ private:
             int value = -1;
             for (i = 0; i < ROW_NUM; i++)
             {
-                if (matrix.getElement(i, j) != 0)
+                if (matrix[i][j] != 0)
                 {
-                    if (matrix.getElement(i, j) > value)
+                    if (matrix[i][j] > value)
                     {
-                        value = matrix.getElement(i, j);
+                        value = matrix[i][j];
                     }
                     else
                     {
@@ -79,7 +78,7 @@ private:
         {
             for (int j = 0; j < COL_NUM; j++)
             {
-                if (matrix.getElement(ROW_NUM - 1, COL_NUM - 1) < matrix.getElement(i, j))
+                if (matrix[ROW_NUM - 1][COL_NUM - 1] < matrix[i][j])
                 {
                     isMaxOk = false;
                 }
@@ -89,25 +88,13 @@ private:
         {
             reward += 100;
         }
-        // int maxValue=-1;
-        // for (int i=0;i<ROW_NUM;i++)
-        // {
-        // for (int j=0;j<COL_NUM;j++)
-        // {
-        // if (matrix.getElement(i,j)>maxValue)
-        // {
-        // maxValue=matrix.getElement(i,j);
-        // }
-        // }
-        // }
-        // reward+=log(maxValue);
         for (int i = 0; i < ROW_NUM; i++)
         {
             for (int j = 0; j < COL_NUM - 1; j++)
             {
-                if (matrix.getElement(i, j) != matrix.getElement(i, j + 1) && matrix.getElement(i, j) != 0 && matrix.getElement(i, j + 1) != 0)
+                if (matrix[i][j] != matrix[i][j + 1] && matrix[i][j] != 0 && matrix[i][j + 1] != 0)
                 {
-                    reward -= 2 * abs(log(matrix.getElement(i, j)) - log(matrix.getElement(i, j + 1)));
+                    reward -= 2 * fabs(log(matrix[i][j]) - log(matrix[i][j + 1]));
                 }
             }
         }
@@ -115,16 +102,14 @@ private:
         {
             for (int j = 0; j < COL_NUM; j++)
             {
-                if (matrix.getElement(i, j) != matrix.getElement(i + 1, j) && matrix.getElement(i, j) != 0 && matrix.getElement(i + 1, j) != 0)
+                //为什么这里写成matrix[i,j]没有报错?
+                if (matrix[i] [j] != matrix[i + 1][ j] && matrix[i] [j] != 0 && matrix[i + 1][ j] != 0)
                 {
-                    reward -= 2 * abs(log(matrix.getElement(i, j)) - log(matrix.getElement(i + 1, j)));
+                    reward -= 2 * fabs(log(matrix[i][j]) - log(matrix[i + 1][j]));
                 }
             }
         }
         return reward;
-#else
-
-#endif
     }
 
 public:
@@ -135,7 +120,7 @@ public:
                          backup_factor(1)
     {
     }
-    ACTION mctsSearch(const Matrix &m, int seed = 4)
+    ACTION run(const Matrix &m, int seed = 4)
     {
         //seed=4 success!
         srand(seed);
