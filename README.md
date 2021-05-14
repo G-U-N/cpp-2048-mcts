@@ -13,14 +13,6 @@
   - [x] 有些种子可以成功合成2048
   - [ ] 有些则只能合成到1024，有待改进。
 
-![Screenshot from 2021-04-30 09-59-06](imgs/Screenshot from 2021-04-30 09-59-06.png)
-
-![Screenshot from 2021-04-30 21-58-22](imgs/Screenshot from 2021-04-30 21-58-22.png)
-
-
-
-![Screenshot from 2021-04-28 19-06-17](imgs/Screenshot from 2021-04-28 19-06-17.png)
-
 
 
 ## 完成作业的一些感想
