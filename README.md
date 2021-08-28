@@ -6,7 +6,7 @@
 
 
 
-作者：wfy
+作者：Fu-yun Wang
 
 Nanjing University, School of Artificial Intelligence.
 
