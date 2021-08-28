@@ -6,7 +6,7 @@
 
 
 
-作者：汪福运
+作者：wfy
 
 Nanjing University, School of Artificial Intelligence.
 
