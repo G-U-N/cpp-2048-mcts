@@ -6,10 +6,6 @@
 
 
 
-作者：Fu-yun Wang
-
-Nanjing University, School of Artificial Intelligence.
-
 ## 1.环境配置
 
 Linux系统下
@@ -76,17 +72,17 @@ ACTION run(const Matrix &matrix, int seed = 4)
  * matrix.update() 返回新的matrix,用于模拟中的未来的状态,参数为你选择的行动.
 ```
 
->  提供了我自己写的RandomMctsPlayer作为设计Agent参考
+> 提供了已实现的的RandomMctsPlayer作为设计Agent参考
 >
 > 包含mctsnode和RandomMctsPlayer头文件.
 
 ## 4. 运行结果展示
 
-![dis3](imgs/dis3.png)
+<div align="center">
+<img src="./imgs/dis3.png" width="400px">
+<img src="./imgs/dis4.png" width="400px">
+<img src="./imgs/dis2.png" width="400px">
+<img src="./imgs/dis1.png" width="400px">
+</div>
 
-![dis4](imgs/dis4.png)
-
-![dis2](imgs/dis2.png)
-
-![dis1](imgs/dis1.png)
 
