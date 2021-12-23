@@ -79,10 +79,9 @@ ACTION run(const Matrix &matrix, int seed = 4)
 ## 4. 运行结果展示
 
 <div align="center">
-<img src="./imgs/dis3.png" width="400px">
-<img src="./imgs/dis4.png" width="400px">
-<img src="./imgs/dis2.png" width="400px">
-<img src="./imgs/dis1.png" width="400px">
+<img src="./imgs/dis4.png" width="500px">
+  
+<img src="./imgs/dis1.png" width="500px">
 </div>
 
 
